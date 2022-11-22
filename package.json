@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predeploy": "npm run build",
+   "deploy": "gh-pages -b main -d build",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -19,5 +21,6 @@
     "@vitejs/plugin-react": "^2.2.0",
     "sass": "^1.56.1",
     "vite": "^3.2.3"
-  }
+  },
+    "homepage": "https://liubomyr-o.github.io//my-app"
 }
