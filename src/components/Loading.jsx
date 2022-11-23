@@ -1,3 +1,5 @@
+import imgUrl from "/public/loading.gif";
+
 export default function Loading() {
-  return <p>Loading...</p>;
+  return <img className="loading" src={imgUrl} alt="loading..." />;
 }

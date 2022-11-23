@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
+import Loading from "./loading";
+import ErrorAlert from "./ErrorAlert";
 
 export default function GetDataByKeyword({ SEARCH_KEYWORD, findLessons }) {
   const [keyword, setKeyword] = useState(SEARCH_KEYWORD);
   const [dataResponse, setDataResponse] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   function resultReceived(dataResponse) {
     findLessons(dataResponse);
@@ -13,28 +17,45 @@ export default function GetDataByKeyword({ SEARCH_KEYWORD, findLessons }) {
   }, [SEARCH_KEYWORD]);
 
   useEffect(() => {
+    setError(false);
+    setLoading(true);
     fetch(`https://react-course-api.azurewebsites.net/lesson/${SEARCH_KEYWORD}`)
       .then((response) => {
         if (response.ok) {
           return response.json();
         } else {
-          return alert(
-            "помилка роботи серверу, ми працюємо над цим, спробуйте знову"
-          );
+          setLoading(false);
+          throw new Error("Network failed, please try again", {
+            cause: response.status,
+          });
         }
       })
       .then((data) => {
         setDataResponse(data);
         console.log(`фетч віддає - ${data}`);
+        if (data.length == 0) {
+          setError({ message: "no results" });
+        }
       })
-      .catch((err) =>
-        alert("якась інша помилка роботи серверу, спробуйте знову")
-      );
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [keyword]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    console.log(`помилка виникла ось така - ${error}`);
+  }
 
   if (dataResponse) {
     console.log(`ключове слово - ${keyword}`);
-    console.log(`відповідь по цьому ключовому слову - ${dataResponse}`);
     resultReceived(dataResponse);
   }
+  return error && <ErrorAlert error={error} />;
 }

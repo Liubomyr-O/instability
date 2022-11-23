@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Loading from "./Loading";
 import LessonPage from "./LessonPage";
 
 export default function ResultNormalizer({ lessonsData }) {
