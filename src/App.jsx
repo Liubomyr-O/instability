@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import "./App.scss";
-import SearchBar from "./components/SearchBar";
-import ResultNormalizer from "./components/ResultNormalizer";
-import GetDataByKeyword from "./components/GetDataByKeyword";
+import SearchBar from "./components/SearchBar.jsx";
+import ResultNormalizer from "./components/ResultNormalizer.jsx";
+import GetDataByKeyword from "./components/GetDataByKeyword.jsx";
 
 function App() {
   const [SEARCH_KEYWORD, setKeyword] = useState("react");

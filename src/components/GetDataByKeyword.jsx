@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Loading from "./loading";
-import ErrorAlert from "./ErrorAlert";
+import Loading from "./Loading.jsx";
+import ErrorAlert from "./ErrorAlert.jsx";
 
 export default function GetDataByKeyword({ SEARCH_KEYWORD, findLessons }) {
   const [keyword, setKeyword] = useState(SEARCH_KEYWORD);

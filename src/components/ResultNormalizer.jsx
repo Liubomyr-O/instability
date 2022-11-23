@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import LessonPage from "./LessonPage";
+import LessonPage from "./LessonPage.jsx";
 
 export default function ResultNormalizer({ lessonsData }) {
   const [lessonsList, setLessonsList] = useState(lessonsData);
